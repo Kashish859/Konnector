@@ -10,6 +10,7 @@
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/f868df920b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
   <script>
     $(document).ready(function () {
@@ -77,6 +78,85 @@
       })
 
       // Login Process Ends
+
+
+
+      // Signup email validation
+      $("#txtemail").keyup(function () {
+        let exp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let email = $(this).val();
+        let res = exp.test(email);
+        if (res == true) {
+          $("#validsignup").addClass("alert1").removeClass("alert2");
+          $("#validsignup").html("Valid Email");
+          $("#signupbtn").prop("disabled", false);
+        } else {
+          $("#validsignup").addClass("alert2").removeClass("alert1");
+          $("#validsignup").html("Invalid Email");
+          $("#signupbtn").prop("disabled", true);
+        }
+      });
+
+
+
+      // Login email validation
+      $("#txtemail1").keyup(function () {
+        let exp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let email = $("#txtemail1").val();
+        let res = exp.test(email);
+        if (res == true) {
+          $("#validlog").addClass("alert1").removeClass("alert2");
+          $("#validlog").html("Valid Email");
+          $("#loginbtn").prop("disabled", false);
+        } else {
+          $("#validlog").addClass("alert2").removeClass("alert1");
+          $("#validlog").html("Invalid Email");
+          $("#loginbtn").prop("disabled", true);
+        }
+      });
+
+
+      $("#eye").click(function () {
+        if ($("#txtpwd1").prop("type") === "password") {
+          $("#txtpwd1").prop("type", "text");
+          $("#eye").addClass("fa-eye").removeClass("fa-eye-slash");
+        } else {
+          $("#txtpwd1").prop("type", "password");
+          $("#eye").addClass("fa-eye-slash").removeClass("fa-eye");
+        }
+      });
+      // Password eye 
+      $("#eyep").click(function () {
+        if ($("#txtpwd").prop("type") === "password") {
+          $("#txtpwd").prop("type", "text");
+          $("#eyep").addClass("fa-eye").removeClass("fa-eye-slash");
+        } else {
+          $("#txtpwd").prop("type", "password");
+          $("#eyep").addClass("fa-eye-slash").removeClass("fa-eye");
+        }
+      });
+
+
+
+
+      $("#txtpwd").keyup(function () {
+        let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        let pwd = $("#txtpwd").val();
+        if (regex.test(pwd) == true)
+          $("#valid").html("Valid password ");
+        else
+          $("#valid").html("Must have  A-Z , a-z ,0-9 , special chracter ");
+      })
+
+
+      $("#txtpwd1").keyup(function () {
+        let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        let pwd = $("#txtpwd1").val();
+        if (regex.test(pwd) == true)
+          $("#valid1").html("Valid password ");
+        else
+          $("#valid1").html("Must have  A-Z , a-z ,0-9 , special chracter ");
+      })
     });
   </script>
 </head>
@@ -94,11 +174,11 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#developers">Developers</a></li>
       <li><a href="#contact">Contact</a></li>
-      
-    <div class="auth-buttons">
-      <button class="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-      <button class="signup" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
-    </div>
+
+      <div class="auth-buttons">
+        <button class="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        <button class="signup" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
+      </div>
     </ul>
 
   </nav>
@@ -232,48 +312,55 @@
   </footer>
   <!-- Footer Ends -->
 
-<!-- Modal Signup Start-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Signup</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="signupForm">
-          <div class="mb-3">
-            <label for="txtemail" class="form-label">Email address</label>
-            <input type="email" required class="form-control" id="txtemail">
-          </div>
-
-          <!-- Password + Checkbox in same row -->
-          <div class="mb-3">
-            <label for="txtpwd" class="form-label">Password</label>
-            <div class="d-flex align-items-center">
-              <input type="password" required class="form-control me-2" id="txtpwd">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input mt-1" style="border: 2px black solid;" id="showPwd">
-              </div>
+  <!-- Modal Signup Start-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Signup</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="signupForm">
+            <div class="mb-3">
+              <label for="txtemail" class="form-label">Email address</label>
+              <input type="email" required class="form-control" id="txtemail">
             </div>
-          </div>
 
-          <div class="mb-3">
-            <label for="utype" class="form-label">User Type</label>
-            <select id="utype" required class="form-select">
-              <option value="organiser">Organiser</option>
-              <option value="player">Player</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="kashish" id="sbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
+            <div class="alert1" role="alert" id="validsignup">(Use your actual email. You will receive a WELCOME
+              message.)</div>
+
+            <!-- Password + Checkbox in same row -->
+            <div class="mb-3">
+              <label for="txtpwd" class="form-label">Password</label>
+
+              <div class="position-relative">
+                <input type="password" class="form-control pe-5" id="txtpwd">
+
+                <!-- Eye Icon Inside Input -->
+                <i class="fa-regular fa-eye-slash position-absolute" id="eyep"
+                  style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></i>
+              </div>
+
+              <div class="alert1" role="alert" id="valid">*</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="utype" class="form-label">User Type</label>
+              <select id="utype" required class="form-select">
+                <option value="organiser">Organiser</option>
+                <option value="player">Player</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="kashish" id="sbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Modal Signup End -->
+  <!-- Modal Signup End -->
 
 
   <!-- Modal Login Start-->
@@ -290,16 +377,25 @@
               <label for="exampleInputEmail1" class="form-label">Email address</label>
               <input type="email" class="form-control" id="txtemail1" aria-describedby="emailHelp">
             </div>
-             <!-- Password + Checkbox in same row -->
-          <div class="mb-3">
-            <label for="txtpwd" class="form-label">Password</label>
-            <div class="d-flex align-items-center">
-              <input type="password" required class="form-control me-2" id="txtpwd1">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input mt-1" style="border: 2px black solid;" id="showPwd3">
-              </div>
+
+            <div class="alert1" role="alert" id="validlog">(Use your actual email. You will receive a WELCOME message.)
             </div>
-          </div>
+            <!-- Password + Checkbox in same row -->
+
+
+            <div class="mb-3">
+              <label for="txtpwd1" class="form-label">Password</label>
+
+              <div class="position-relative">
+                <input type="password" required class="form-control pe-5" id="txtpwd1">
+
+                <!-- Eye Icon Inside Input -->
+                <i class="fa-regular fa-eye-slash position-absolute" id="eye"
+                  style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></i>
+              </div>
+
+              <div class="alert1" role="alert" id="valid1">*</div>
+            </div>
 
           </form>
         </div>
@@ -333,22 +429,22 @@
 
 
 
-<!-- Script For Show Password For Signup Modal -->
-<script>
-  document.getElementById("showPwd").addEventListener("change", function () {
-    const pwdField = document.getElementById("txtpwd");
-    pwdField.type = this.checked ? "text" : "password";
-  });
-</script>
+  <!-- Script For Show Password For Signup Modal -->
+  <script>
+    document.getElementById("showPwd").addEventListener("change", function () {
+      const pwdField = document.getElementById("txtpwd");
+      pwdField.type = this.checked ? "text" : "password";
+    });
+  </script>
 
 
-<!-- Script For Show Password For Login Modal -->
-<script>
-  document.getElementById("showPwd3").addEventListener("change", function () {
-    const pwdField = document.getElementById("txtpwd1");
-    pwdField.type = this.checked ? "text" : "password";
-  });
-</script>
+  <!-- Script For Show Password For Login Modal -->
+  <script>
+    document.getElementById("showPwd3").addEventListener("change", function () {
+      const pwdField = document.getElementById("txtpwd1");
+      pwdField.type = this.checked ? "text" : "password";
+    });
+  </script>
 </body>
-</html>
 
+</html>

@@ -190,6 +190,17 @@
 
     /* Carousel CSS Ends */
     
+    /*Validations*/
+    .alert1 {
+    color: #2ECC71;
+    /* Emerald Green for valid email feedback */
+}
+
+.alert2 {
+    color: #E74C3C;
+    /* Pomegranate Red for invalid email feedback */
+}
+    
     /* Footer CSS Starts */
     
     footer {
