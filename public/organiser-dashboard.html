@@ -125,7 +125,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="changePwdForm">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
               <input type="email" class="form-control" readonly id="txtemail1" aria-describedby="emailHelp">
@@ -212,6 +212,21 @@
     </div>
   </footer>
      <!-- Footer Ends -->
+
+
+     <script>
+  document.getElementById("cbtn").addEventListener("click", function () {
+  const form = document.getElementById("changePwdForm");
+  if (form.checkValidity()) {
+    // all required fields are valid
+    alert("Form is valid. Proceed with AJAX here...");
+  } else {
+    // trigger browser validation UI
+    form.reportValidity();
+  }
+});
+
+     </script>
 
 </body>
 </html>
