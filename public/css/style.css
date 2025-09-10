@@ -201,7 +201,7 @@
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 40px;
-       position: static;
+      position: static;
     }
 
     .footer-logo h2 {
@@ -288,6 +288,7 @@
     @media(max-width: 600px) {
       .footer-container {
         grid-template-columns: 1fr;
+        margin-left: -50px;
       }
       .footer-social {
         text-align: center;
