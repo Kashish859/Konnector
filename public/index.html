@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HomePage</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    $(document).ready(function () {
+
+      // // Signup Process Start
+      $("#sbtn").click(function () {
+        let form = document.getElementById("signupForm");
+
+        if (form.checkValidity()) {
+          // If valid → run AJAX
+          let obj = {
+            type: "get",
+            url: "/Signup",
+            data: {
+              txtemail: $("#txtemail").val(),
+              txtpwd: $("#txtpwd").val(),
+              utype: $("#utype").val(),
+            }
+          }
+
+
+          $.ajax(obj).then(
+            function (responseJsonAry) {
+              alert(responseJsonAry);
+            }).fail(function (err) { alert(err.message) })
+
+        }
+        else {
+          // Show validation error messages
+          alert("All Field Required")
+        }
+      })
+      // // Signup Process Ends
+
+      // Login Process Starts
+      $("#lbtn").click(function () {
+
+        let obj = {
+          type: "get",
+          url: "/Login",
+          data: {
+            txtemail: $("#txtemail1").val(),
+            txtpwd: $("#txtpwd1").val(),
+          }
+        }
+
+
+        $.ajax(obj).then(
+          function (responseJsonAry) {
+
+            if (responseJsonAry == "organiser") {
+              localStorage.setItem("activeuser", $("#txtemail1").val())
+              location.href = "organiser-dashboard.html";
+            }
+
+            else if (responseJsonAry == "player") {
+              location.href = "player-dashboard.html";
+              localStorage.setItem("activeuser", $("#txtemail1").val())
+            }
+            else
+              alert("Invalid User");
+
+            //  alert(responseJsonAry);
+          }).fail(function (err) { alert(err.message) })
+      })
+
+      // Login Process Ends
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Konnector</div>
+
+    <div class="menu-toggle">☰</div>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#developers">Developers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+      <button class="login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+      <button class="signup" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <div class="carousel">
+    <img src="https://picsum.photos/id/1018/1200/400" class="active" alt="">
+    <img src="https://picsum.photos/id/1015/1200/400" alt="">
+    <img src="https://picsum.photos/id/1019/1200/400" alt="">
+  </div>
+
+  <!-- Our Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card">
+        <img src=https://i.pinimg.com/736x/1d/15/ce/1d15ce25f061cbb8a1c2c5fa5936b49a.jpg alt="">
+        <h3>Publish Tournamennt</h3>
+        <p>Publishing tournaments is an essential part of the competitive gaming ecosystem.</p>
+      </div>
+      <div class="card">
+        <img src=https://i.pinimg.com/736x/42/3b/42/423b42ed63e74124ec515ee615ffe3a6.jpg alt="">
+        <h3>Upcoming Tournament</h3>
+        <p>The upcoming tournament is set to bring fierce competition and exciting gameplay.</p>
+      </div>
+      <div class="card">
+        <img src=https://i.pinimg.com/736x/71/77/42/717742288a087039ae569fc137d66ca1.jpg alt="">
+        <h3>Win Prizes</h3>
+        <p>Compete for a chance to win amazing prizes and showcase your skills at the top level.</p>
+      </div>
+      <div class="card">
+        <img src=https://i.pinimg.com/736x/04/70/91/047091c9d0f385dcbe462d1007e3df27.jpg alt="">
+        <h3>Certifications</h3>
+        <p>Earn a prestigious certification to recognize your achievements and skills in the tournament.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet the Developers -->
+  <section id="developers">
+    <h2>Meet the Developers</h2>
+    <div class="developers">
+      <div class="card">
+        <img src="uploads/WhatsApp Image 2025-08-30 at 1.10.46 PM.jpeg" alt="">
+        <h3>Mentor : Rajesh K Bansal</h3>
+        <p>Author of Real Java.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/300/200?random=6" alt="">
+        <h3>Kashish Kumar</h3>
+        <p>Full Stack NodeJs Developer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="map">
+    <h2>Find Us</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6895.808581400485!2d74.952481!3d30.211279000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391732a4f880032d%3A0x89c6142e92cd8fc1!2sReal%20Java%20Book%20Head%20Office!5e0!3m2!1sen!2sin!4v1756375610078!5m2!1sen!2sin"></iframe>
+  </section>
+
+  <!-- Feedback Form -->
+  <section id="contact">
+    <h2>Feedback Form</h2>
+    <form action="/sendfeedback" method="post">
+      <input type="text" placeholder="Your Name" name="name" required>
+      <input type="email" placeholder="Your Email" name="mail" required>
+      <textarea rows="5" placeholder="Your Feedback" name="feedback"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Footer Start -->
+  <footer>
+    <div class="footer-container">
+
+      <!-- Logo and text -->
+      <div class="footer-logo">
+        <h2>Konnector</h2>
+        <p>Konnector is designed to bring people, ideas, and opportunities together on one powerful platform.
+          We make it easier to connect, collaborate, and grow, whether you’re building professional networks,
+          exploring new possibilities, or strengthening existing relationships.With Konnector, every connection becomes
+          more meaningful and impactful.</p>
+      </div>
+
+      <!-- Links 1 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Links 2 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Organiser</a></li>
+          <li><a href="#">Players</a></li>
+          <li><a href="#">Career</a></li>
+          <li><a href="#">Certificate</a></li>
+          <li><a href="#">Tournaments</a></li>
+        </ul>
+      </div>
+
+      <!-- Links + Social -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <a href="#contact" class="contact-btn">Contact Us</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      © 2025-2026 All Rights Reserved.
+    </div>
+  </footer>
+  <!-- Footer Ends -->
+
+<!-- Modal Signup Start-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Signup</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="signupForm">
+          <div class="mb-3">
+            <label for="txtemail" class="form-label">Email address</label>
+            <input type="email" required class="form-control" id="txtemail">
+          </div>
+
+          <!-- Password + Checkbox in same row -->
+          <div class="mb-3">
+            <label for="txtpwd" class="form-label">Password</label>
+            <div class="d-flex align-items-center">
+              <input type="password" required class="form-control me-2" id="txtpwd">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input mt-1" style="border: 2px black solid;" id="showPwd">
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="utype" class="form-label">User Type</label>
+            <select id="utype" required class="form-select">
+              <option value="organiser">Organiser</option>
+              <option value="player">Player</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="kashish" id="sbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Signup</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Signup End -->
+
+
+  <!-- Modal Login Start-->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtemail1" aria-describedby="emailHelp">
+            </div>
+             <!-- Password + Checkbox in same row -->
+          <div class="mb-3">
+            <label for="txtpwd" class="form-label">Password</label>
+            <div class="d-flex align-items-center">
+              <input type="password" required class="form-control me-2" id="txtpwd1">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input mt-1" style="border: 2px black solid;" id="showPwd3">
+              </div>
+            </div>
+          </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="kashish2" id="lbtn" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Login End -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Carousel Auto Slide
+    let index = 0;
+    const slides = document.querySelectorAll('.carousel img');
+    setInterval(() => {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 3000);
+
+    // Navbar Toggle
+    const toggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('nav ul');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+  </script>
+
+
+
+<!-- Script For Show Password For Signup Modal -->
+<script>
+  document.getElementById("showPwd").addEventListener("change", function () {
+    const pwdField = document.getElementById("txtpwd");
+    pwdField.type = this.checked ? "text" : "password";
+  });
+</script>
+
+
+<!-- Script For Show Password For Login Modal -->
+<script>
+  document.getElementById("showPwd3").addEventListener("change", function () {
+    const pwdField = document.getElementById("txtpwd1");
+    pwdField.type = this.checked ? "text" : "password";
+  });
+</script>
+</body>
+</html>
+

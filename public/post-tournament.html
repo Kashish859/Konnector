@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Post Tournament</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    $(document).ready(function () {
+
+      // Tournament Publish Start
+      $("#pbtn").click(function () {
+
+        let obj = {
+          type: "get",
+          url: "/publishevent",
+          data: {
+            mail: $("#mail").val(),
+            title: $("#title").val(),
+            date: $("#date").val(),
+            time: $("#time").val(),
+            address: $("#address").val(),
+            city: $("#city").val(),
+            sports: $("#sports").val(),
+            min: $("#min").val(),
+            max: $("#max").val(),
+            reg: $("#reg").val(),
+            fee: $("#fee").val(),
+            money: $("#money").val(),
+            person: $("#person").val(),
+          }
+        }
+
+
+        $.ajax(obj).then(
+          function (responseJsonAry) {
+            alert(responseJsonAry);
+          }).fail(function (err) { alert(err.message) })
+      })
+
+      // Tournament Publish Ends
+
+      // Email Fix Started
+
+       $("#mail").val(localStorage.getItem("activeuser"));
+
+       // Email Fix Ended
+    });
+  </script>
+  
+    <script>
+      function home()
+      {
+        location.href="index.html"
+      }
+    </script>
+
+</head>
+<body>
+
+    <!-- Navbar Start-->
+    
+  <nav>
+    <div class="logo">Konnector</div>
+
+    <div class="auth-buttons">
+      <button class="signup"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="lgbtn" onclick="home()">Home</button>
+    </div>
+  </nav>
+  
+    <!-- Navbar End-->
+     
+    <center>
+      <h3 class="mt-5">Post Tournament</h3>
+    </center>
+
+  <div class="container row mx-auto">
+    <form class="row g-3">
+
+      <div class="col-md-12">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" readonly id="mail">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputTitle" class="form-label">Event Title</label>
+        <input type="title" class="form-control" id="title">
+      </div>
+
+      <div class="col-md-3">
+        <label for="inputDate" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date">
+      </div>
+
+      <div class="col-md-3">
+        <label for="inputTime" class="form-label">Time</label>
+        <input type="time" class="form-control" id="time">
+      </div>
+
+      <div class="col-9">
+        <label for="inputAddress" class="form-label">Address/Location</label>
+        <input type="text" class="form-control" id="address">
+      </div>
+
+      <div class="col-md-3">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="city">
+      </div>
+
+      <div class="col-8">
+        <label for="inputSports" class="form-label">Sports Category</label>
+        <input type="text" class="form-control" id="sports">
+      </div>
+
+      <div class="col-2">
+        <label for="inputMin" class="form-label">Minimum Age</label>
+        <input type="text" maxlength="2" class="form-control" id="min">
+      </div>
+
+      <div class="col-2">
+        <label for="inputMax" class="form-label">Maximum Age</label>
+        <input type="text" maxlength="2" class="form-control" id="max">
+      </div>
+
+      <div class="col-md-8">
+        <label for="inputReg" class="form-label">Last Date Of Registration</label>
+        <input type="date" class="form-control" id="reg">
+      </div>
+
+      <div class="col-md-2">
+        <label for="inputFee" class="form-label">Fee</label>
+        <input type="number" class="form-control" id="fee">
+      </div>
+
+      <div class="col-md-2">
+        <label for="inputMoney" class="form-label">Prize Money</label>
+        <input type="number" class="form-control" id="money">
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputPerson" class="form-label">Contact Person</label>
+        <input type="text" class="form-control" id="person">
+      </div>
+
+      <center>
+        <button type="button" id="pbtn" class="btn btn-dark px-4 py-2">Publish Event</button>
+      </center>
+    </form>
+  </div>
+  
+ <!-- Footer Start -->
+<footer style="margin-top: 75px;">
+    <div class="footer-container">
+      
+      <!-- Logo and text -->
+      <div class="footer-logo">
+        <h2>Konnector</h2>
+        <p>Konnector is designed to bring people, ideas, and opportunities together on one powerful platform.
+          We make it easier to connect, collaborate, and grow, whether you’re building professional networks,
+          exploring new possibilities, or strengthening existing relationships.With Konnector, every connection becomes
+          more meaningful and impactful.</p>
+      </div>
+      
+      <!-- Links 1 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Links 2 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Organiser</a></li>
+          <li><a href="#">Players</a></li>
+          <li><a href="#">Career</a></li>
+          <li><a href="#">Certificate</a></li>
+          <li><a href="#">Tournaments</a></li>
+        </ul>
+      </div>
+
+      <!-- Links + Social -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <a href="#contact" class="contact-btn">Contact Us</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      © 2025-2026 All Rights Reserved.
+    </div>
+  </footer>
+     <!-- Footer Ends -->
+
+</body>
+</html>

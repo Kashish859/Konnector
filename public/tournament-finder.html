@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tournament Finder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        var mymodule = angular.module("kuchModule", []);
+
+        mymodule.controller("kuchController", function ($scope, $http) {
+            $scope.jsonArray = [];
+            $scope.city="none";
+            $scope.sports="none";
+            $scope.doFetchcity = function () {
+                var url = "/do-fetch-city";
+
+
+                $http.get(url).then(allGoodFx, someBadFx);
+                function allGoodFx(response) {
+                    //resp in JSON array
+                  //  alert(JSON.stringify(response.data));
+                    $scope.jsonArray = response.data;
+                }
+
+                function someBadFx(response) {
+                    alert(JSON.stringify(response.data));
+                }
+            };
+
+        
+            $scope.doFetchgames = function () {
+                var url = "/do-fetch-games";
+
+
+                $http.get(url).then(allGoodFx, someBadFx);
+                function allGoodFx(response) {
+                    //resp in JSON array
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonarray = response.data;
+                }
+
+                function someBadFx(response) {
+                    alert(JSON.stringify(response.data));
+                }
+            }
+            
+             $scope.fetchtournament = function () {
+            //  alert();
+                var url = "/do-fetchtournament?sports="+$scope.sports+"&city="+$scope.city;
+
+
+                $http.get(url).then(allGoodFx, someBadFx);
+                function allGoodFx(response) {
+                    //resp in JSON array
+                    // alert(JSON.stringify(response.data));
+                    $scope.json = response.data;
+                }
+
+                function someBadFx(response) {
+                    alert(JSON.stringify(response.data));
+                }
+            }
+
+            $scope.fetchorganiser = function (emailid) {
+                // alert(emailid);
+                var url = "/do-fetchorganiser?mail="+emailid;
+
+
+                $http.get(url).then(allGoodFx, someBadFx);
+                function allGoodFx(response) 
+                {
+                    // resp in JSON array
+                    // alert(JSON.stringify(response.data));
+                    $scope.organ = response.data;
+                }
+
+                function someBadFx(response)
+                {
+                    alert(JSON.stringify(response.data));
+                }
+            }
+
+           $scope.oneRecord={};
+           $scope.dofetch1=function(index)
+           {
+         //   alert(JSON.stringify($scope.jsonArray[index]))
+            $scope.oneRecord=$scope.json[index];
+           }
+
+        });
+    </script>
+    
+    <script>
+      function home()
+      {
+        location.href="index.html"
+      }
+    </script>
+</head>
+<body ng-app="kuchModule" ng-controller="kuchController" ng-init="doFetchcity(); doFetchgames();">
+  
+   <!-- Navbar Start -->
+  <nav>
+    <div class="logo">Konnector</div>
+
+    <div class="auth-buttons">
+      <button class="signup"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="lgbtn" onclick="home()">Home</button>
+    </div>
+  </nav>
+  
+    <!-- Navbar End-->
+
+    <center>
+      <h3 class="mt-5">Tournament Finder</h3>
+    </center>
+  
+  <div class="container mx-auto mt-5 px-3 row">
+     <div class="col-md-4">
+      <label class="form-label">
+        Select City
+      </label>
+      <select class="form-select" ng-model="city">
+       <option value="none" > Choose City</option>
+      <option ng-repeat="obj in jsonArray">{{obj.city}}</option>
+      </select>
+     </div>
+
+     <div class="col-md-4">
+      <label class="form-label">
+        Select Games
+      </label>
+      <select class="form-select" ng-model="sports">
+       <option value="none"> Choose Games</option>
+      <option ng-repeat="obj in jsonarray">{{obj.sports}}</option>
+      </select>
+     </div>
+
+     <div class="col-md-4">
+      <br>
+      <Button class="btn btn-dark mt-2 px-5" type="button" ng-click="fetchtournament();">Fetch Tournament</Button>
+    </div>
+  </div>
+
+  <div class="container mx-auto mt-5 px-3 row">
+    <div class="card col-md-3" ng-repeat="obj in json">
+  <div class="card-body">
+    <h6>Email Id: {{obj.emailid}}</h6>
+    <h6>Prize Money: {{obj.prizemoney}}</h6>
+    <h6>Fee: {{obj.fee}}</h6>
+  
+    <a href="" class="btn btn-success mt-2"   ng-click="dofetch1($index);" data-bs-toggle="modal" data-bs-target="#exampleModal" > More Details</a>
+  </div>
+</div>
+  </div>
+
+<!-- More Info Modal Starts -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">More Info</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+            <b>Email Id : </b>  {{oneRecord.emailid}}
+        </p>
+
+        <p>
+            <b>Title  : </b>  {{oneRecord.title}}
+        </p>
+       
+       <p>
+            <b>Date  : </b>  {{oneRecord.dot | date:'yyyy-MM-dd'}}
+        </p>
+
+        <p>
+            <b>Time  : </b>  {{oneRecord.tot}}
+        </p>
+       
+        <p>
+            <b>Address  : </b>  {{oneRecord.address}}
+        </p>
+       
+        <p>
+            <b>City  : </b>  {{oneRecord.city}}
+        </p>
+       
+        <p>
+            <b>Sports  : </b>  {{oneRecord.sports}}
+        </p>
+       
+        <p>
+            <b>Minimum Age  : </b>  {{oneRecord.minage}}
+        </p>
+
+        <p>
+            <b>Maximum Age  : </b>  {{oneRecord.maxage}}
+        </p>
+       
+        <p>
+            <b>Resgistration  : </b>  {{oneRecord.registration}}
+        </p>
+       
+        <p>
+            <b>Fee  : </b>  {{oneRecord.fee}}
+        </p>
+       
+        <p>
+            <b>Prize Money  : </b>  {{oneRecord.prizemoney}}
+        </p>
+
+        <p>
+            <b>Contact Person  : </b>  {{oneRecord.contactperson}}
+        </p>
+        <div class="modal-footer">
+        <a href="" class="btn btn-warning" style="font-weight:600" ng-click="fetchorganiser(oneRecord.emailid);"  data-bs-toggle="modal" data-bs-target="#org"> Organiser Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- More Info Modal Ends -->
+
+ <!-- Footer Start -->
+<footer style="margin-top: 75px;">
+    <div class="footer-container">
+      
+      <!-- Logo and text -->
+      <div class="footer-logo">
+        <h2>Konnector</h2>
+        <p>Konnector is designed to bring people, ideas, and opportunities together on one powerful platform.
+          We make it easier to connect, collaborate, and grow, whether you’re building professional networks,
+          exploring new possibilities, or strengthening existing relationships.With Konnector, every connection becomes
+          more meaningful and impactful.</p>
+      </div>
+      
+      <!-- Links 1 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Links 2 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Organiser</a></li>
+          <li><a href="#">Players</a></li>
+          <li><a href="#">Career</a></li>
+          <li><a href="#">Certificate</a></li>
+          <li><a href="#">Tournaments</a></li>
+        </ul>
+      </div>
+
+      <!-- Links + Social -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <a href="#contact" class="contact-btn">Contact Us</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      © 2025-2026 All Rights Reserved.
+    </div>
+  </footer>
+     <!-- Footer Ends -->
+
+      <!-- Oraganiser Details Modal Start  -->
+
+     <div class="modal fade" id="org" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Organiser Details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+           <b>Email Id : </b>  {{organ[0].txtmail}}
+        </p>
+
+        <p>
+           <b>Organisation Name : </b>  {{organ[0].orgname}}
+        </p>
+
+        <p>
+           <b>Registration Number : </b>  {{organ[0].regname}}
+        </p>
+
+        <p>
+           <b>Address 1 : </b>  {{organ[0].address}}
+        </p>
+
+        <p>
+           <b>Address 2 : </b>  {{organ[0].address2}}
+        </p>
+
+        <p>
+           <b>City : </b>  {{organ[0].city}}
+        </p>
+
+        <p>
+           <b>State : </b>  {{organ[0].state}}
+        </p>
+
+        <p>
+           <b>Postal Code : </b>  {{organ[0].post}}
+        </p>
+
+         <p>
+           <b>Type Of Sport : </b>  {{organ[0].sports}}
+        </p>
+
+        <p>
+           <b>Website : </b>  {{organ[0].web}}
+        </p>
+        
+        <p>
+           <b>Instagram Link : </b>  {{organ[0].insta}}
+        </p>
+
+
+        <p>
+           <b>Organisation Head : </b>  {{organ[0].head}}
+        </p>
+
+        <p>
+           <b>Contact Number: </b>  {{organ[0].contact}}
+        </p>
+
+        <p>
+           <b>Other Information: </b>  {{organ[0].otherinfo}}
+        </p>
+
+        <p>
+            <img src="{{organ[0].picurl}}" alt="" width="300" height="300">
+        </p>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- Oraganiser Details Modal Ends  -->
+</body>
+</html>

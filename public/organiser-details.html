@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+  <script>
+    function showPrev(fileRef, prevRef) {
+      const [file] = fileRef.files
+      if (file) {
+        prevRef.src = URL.createObjectURL(file)
+      }
+    }
+
+    $(document).ready(function () {
+
+      // Fetch Organiser Data Process Start
+      $("#sbtn").click(function () {
+        // alert();
+
+        let obj = {
+          type: "get",
+          url: "/fetchorganiser",
+          data: {
+            txtemail: $("#txtemail").val(),
+          }
+        }
+
+
+        $.ajax(obj).then(
+          function (responseJsonAry) {
+            //alert((JSON.stringify(responseJsonAry)));
+
+            var orgname = responseJsonAry[0].orgname;
+            $("#orgname").val(orgname);
+
+            var regname = responseJsonAry[0].regname;
+            $("#regname").val(regname);
+
+            var address = responseJsonAry[0].address;
+            $("#address").val(address);
+
+            var address2 = responseJsonAry[0].address2;
+            $("#address2").val(address2);
+
+            var city = responseJsonAry[0].city;
+            $("#city").val(city);
+
+            var select = responseJsonAry[0].state;
+            $("#select").val(select);
+
+            var code = responseJsonAry[0].post;
+            $("#code").val(code);
+
+            var types = responseJsonAry[0].sports;
+            $("#types").val(types);
+
+            var web = responseJsonAry[0].web;
+            $("#web").val(web);
+
+            var insta = responseJsonAry[0].insta;
+            $("#insta").val(insta);
+
+            var head = responseJsonAry[0].head;
+            $("#head").val(head);
+
+            var contact = responseJsonAry[0].contact;
+            $("#contact").val(contact);
+
+            var otherinfo = responseJsonAry[0].otherinfo;
+            $("#otherinfo").val(otherinfo);
+
+            var picurl = responseJsonAry[0].picurl;
+            $("#prev").prop("src", picurl);
+
+
+          }).fail(function (err) { alert(err.message) })
+      })
+      // Fetch Organiser Data Process Ends
+
+      // Email Fix Started
+
+        $("#txtemail").val(localStorage.getItem("activeuser"));
+        
+        // Email Fix Ended
+      
+    })
+
+  </script>
+    
+    <script>
+      function home()
+      {
+        localStorage.removeItem("activeuser");
+        location.href="index.html";
+      }
+    </script>
+</head>
+<body>
+  
+    
+   <!-- Navbar Start -->
+  <nav>
+    <div class="logo">Konnector</div>
+
+    <div class="auth-buttons">
+      <button class="signup"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="lgbtn" onclick="home()">Home</button>
+    </div>
+  </nav>
+  
+    <!-- Navbar End-->
+
+  <center>
+    <h3 class="mt-5">Organisation Details</h3>
+  </center>
+  <div class="container row mx-auto">
+    <form class="row g-3" method="post" enctype="multipart/form-data" action="/sendtoserver">
+      <div class="col-md-10">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="txtemail" name="txtmail"  readonly placeholder="abc@gmail.com">
+      </div>
+
+      <div class="col-md-2"><br>
+        <button type="button" style="font-weight: 700;" class="btn btn-warning px-5 mt-2" id="sbtn">Search</button>
+      </div>
+
+
+
+      <div class="col-md-7">
+        <label for="inputName4" class="form-label">Organisation Name</label>
+        <input type="name" class="form-control" id="orgname" name="orgname" placeholder="name">
+      </div>
+      <div class="col-md-5">
+        <label for="inputNumber4" class="form-label">Registration Number</label>
+        <input type="number" class="form-control" id="regname" name="regname" placeholder="123456789">
+      </div>
+
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St">
+      </div>
+
+      <div class="col-12">
+        <label for="inputAddress2" class="form-label">Address 2</label>
+        <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" name="city">
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">State</label>
+        <select id="select" class="form-select" name="select">
+          <option selected>Choose...</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Chhattisgarh">Chhattisgarh</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland">Nagaland</option>
+          <option value="Odisha">Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Tripura">Tripura</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="West Bengal">West Bengal</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label for="inputCode" class="form-label">Postal Code</label>
+        <input type="text" class="form-control" id="code" name="code" placeholder="00000">
+      </div>
+
+      <div class="col-md-12">
+        <label for="inputType" class="form-label">Deals In Types Of Sports</label>
+        <input type="text" class="form-control" id="types" name="types">
+      </div>
+
+      <div class="col-md-8">
+        <label for="inputWebsite4" class="form-label">Website</label>
+        <input type="website" class="form-control" id="web" name="web" placeholder="www.abc.com">
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputInsta4" class="form-label">Instagram Link</label>
+        <input type="insta" class="form-control" id="insta" name="insta" placeholder="link">
+      </div>
+
+      <div class="col-md-8">
+        <label for="inputHead4" class="form-label">Organisation Head</label>
+        <input type="head" class="form-control" id="head" name="head" placeholder="head name">
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputContact4" class="form-label">Contact Number</label>
+        <input type="contact" class="form-control" id="contact" name="contact" placeholder="0000000000">
+      </div>
+
+      <div class="col-md-8">
+        <label for="inputPicture4" class="form-label">Registration Certificate Picture</label>
+        <input type="file" class="form-control" name="filepic" id="filepic" onchange="showPrev(filepic,prev)">
+      </div>
+
+
+      <div class="col-md-4">
+        <label for="inputPreview4" class="form-label">Preview</label><br>
+        <img src="" alt="" width="410" height="150" id="prev">
+      </div>
+
+      <div class="col-md-12">
+        <label for="inputInfo4" class="form-label">Other Information</label>
+        <textarea name="otherinfo" id="otherinfo" rows="3" class="form-control"></textarea>
+      </div>
+
+
+
+      <div class="col-12 mt-3 mb-5">
+        <center>
+          <button type="submit" class="btn btn-dark px-4 mt-3">Send To Server</button>
+          <button type="modify" class="btn btn-dark px-5 mt-3" formaction="/modify">Modify</button>
+        </center>
+      </div>
+
+
+    </form>
+  </div>
+  
+ <!-- Footer Start -->
+<footer style="margin-top: 75px;">
+    <div class="footer-container">
+      
+      <!-- Logo and text -->
+      <div class="footer-logo">
+        <h2>Konnector</h2>
+        <p>Konnector is designed to bring people, ideas, and opportunities together on one powerful platform.
+          We make it easier to connect, collaborate, and grow, whether you’re building professional networks,
+          exploring new possibilities, or strengthening existing relationships.With Konnector, every connection becomes
+          more meaningful and impactful.</p>
+      </div>
+      
+      <!-- Links 1 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Links 2 -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Organiser</a></li>
+          <li><a href="#">Players</a></li>
+          <li><a href="#">Career</a></li>
+          <li><a href="#">Certificate</a></li>
+          <li><a href="#">Tournaments</a></li>
+        </ul>
+      </div>
+
+      <!-- Links + Social -->
+      <div class="footer-links">
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <a href="#contact" class="contact-btn">Contact Us</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      © 2025-2026 All Rights Reserved.
+    </div>
+  </footer>
+     <!-- Footer Ends -->
+
+</body>
+</html>
