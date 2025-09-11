@@ -260,6 +260,11 @@
       transition: 0.3s;
     }
 
+    .t
+    {
+      color: #aaa;
+    }
+
     .footer-social a:hover {
       color: #fff;
     }
