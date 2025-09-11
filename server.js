@@ -589,17 +589,17 @@ app.get("/do-fetchtournament",function(req,resp){
 })
 })
 
-app.get("/do-fetchorganiser",function(req,resp){
-// console.log(req.query.rid);
-   let email=req.query.mail;
-   console.log(email);
-    mySqlVen.query("select * from organiser where txtmail=?",[email], function (error,jsonarray) {
-        if (error == null)
-            resp.send(jsonarray);
-        else
-            resp.send(error.message);
-})
-})
+// app.get("/do-fetchorganiser",function(req,resp){
+// // console.log(req.query.rid);
+//    let email=req.query.mail;
+//    console.log(email);
+//     mySqlVen.query("select * from organiser where txtmail=?",[email], function (error,jsonarray) {
+//         if (error == null)
+//             resp.send(jsonarray);
+//         else
+//             resp.send(error.message);
+// })
+// })
 
 //==================================================== Tournament Finder.html Page Ends =============================================//
 

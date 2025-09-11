@@ -70,24 +70,24 @@
                 }
             }
 
-            $scope.fetchorganiser = function (emailid) {
-                alert(emailid);
-                var url = "/do-fetchorganiser?mail="+emailid;
+            // $scope.fetchorganiser = function (emailid) {
+            //    // alert(emailid);
+            //     var url = "/do-fetchorganiser?mail="+emailid;
 
 
-                $http.get(url).then(allGoodFx, someBadFx);
-                function allGoodFx(response) 
-                {
-                    // resp in JSON array
-                    // alert(JSON.stringify(response.data));
-                    $scope.organ = response.data;
-                }
+            //     $http.get(url).then(allGoodFx, someBadFx);
+            //     function allGoodFx(response) 
+            //     {
+            //         // resp in JSON array
+            //         // alert(JSON.stringify(response.data));
+            //         $scope.organ = response.data;
+            //     }
 
-                function someBadFx(response)
-                {
-                    alert(JSON.stringify(response.data));
-                }
-            }
+            //     function someBadFx(response)
+            //     {
+            //         alert(JSON.stringify(response.data));
+            //     }
+            // }
 
            $scope.oneRecord={};
            $scope.dofetch1=function(index)
@@ -224,7 +224,7 @@
             <b>Contact Person  : </b>  {{oneRecord.contactperson}}
         </p>
         <div class="modal-footer">
-        <a href="" class="btn btn-warning" style="font-weight:600" ng-click="fetchorganiser(oneRecord.emailid);"  data-bs-toggle="modal" data-bs-target="#org"> Organiser Details</a>
+        <!-- <a href="" class="btn btn-warning" style="font-weight:600" ng-click="fetchorganiser(oneRecord.emailid);"  data-bs-toggle="modal" data-bs-target="#org"> Organiser Details</a> -->
         </div>
       </div>
     </div>
@@ -295,7 +295,7 @@
 
       <!-- Oraganiser Details Modal Start  -->
 
-     <div class="modal fade" id="org" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <!-- <div class="modal fade" id="org" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -367,7 +367,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
       <!-- Oraganiser Details Modal Ends  -->
 </body>
