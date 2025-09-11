@@ -68,19 +68,16 @@
     <div class="container row mx-auto">
         <div class="card col-md-3 mt-3" ng-repeat=" obj in jsonArray">
             <div class="card-body">
-                <h6 class="card-title"><b><font color="black">Email Id :</font></b> <font color="green">{{obj.emailid}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Event Title :</font></b> <font color="green">{{obj.title}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Date :</font></b> <font color="green">{{obj.dot| date:'yyyy-MM-dd'}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Time :</font></b> <font color="green">{{obj.tot}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Location :</font></b> <font color="green">{{obj.address}}</font></h6>
-                <h6 class="card-text"><b><font color="black">City :</font></b> <font color="green">{{obj.city}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Sports Category :</font></b> <font color="green">{{obj.sports}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Minimum Age :</font></b> <font color="green">{{obj.minage}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Maximum Age :</font></b> <font color="green">{{obj.maxage}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Last Date Of Registration :</font></b> <font color="green">{{obj.registration}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Fee :</font></b> <font color="green">{{obj.fee}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Prize Money :</font></b> <font color="green">{{obj.prizemoney}}</font></h6>
-                <h6 class="card-text"><b><font color="black">Contact Person :</font></b> <font color="green">{{obj.contactperson}}</font></h6>
+                <img src="{{obj.picurl1}}" alt="" width="150" height="150">
+                <img src="{{obj.picurl}}" alt="" width="150" height="150">
+                <h6 class="card-title"><b><font color="black">Name :</font></b> <font color="green">{{obj.name}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Gender :</font></b> <font color="green">{{obj.gender}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Date Of Birth :</font></b> <font color="green">{{obj.dob}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Email Id :</font></b> <font color="green">{{obj.emailid}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Address :</font></b> <font color="green">{{obj.address}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Contact Number :</font></b> <font color="green">{{obj.contactnumber}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Sports :</font></b> <font color="green">{{obj.games}}</font></h6>
+                <h6 class="card-text"><b><font color="black">Other Info :</font></b> <font color="green">{{obj.info}}</font></h6>
 
             </div>
         </div>
