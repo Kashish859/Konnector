@@ -661,10 +661,10 @@ app.get("/do-block-users",function(req,resp){
 //==================================================== Player Data.html Page Starts =============================================//
 
 app.get("/do-fetch-all-players",function(req,resp){
-    let email=req.query.txtemail;
-    // console.log(email);
+ 
+ 
 
-    mySqlVen.query("select * from tournament", function (error,jsonarray) {
+    mySqlVen.query("select * from player", function (error,jsonarray) {
         if (error == null)
             resp.send(jsonarray);
         else
