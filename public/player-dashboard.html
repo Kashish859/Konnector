@@ -58,6 +58,47 @@
               $("#txtemail1").val(localStorage.getItem("activeuser"));
 
             // Email Fix Ended
+
+             // Password eye 
+      $("#eyep").click(function () {
+        if ($("#txtpwd3").prop("type") === "password") {
+          $("#txtpwd3").prop("type", "text");
+          $("#eyep").addClass("fa-eye").removeClass("fa-eye-slash");
+        } else {
+          $("#txtpwd3").prop("type", "password");
+          $("#eyep").addClass("fa-eye-slash").removeClass("fa-eye");
+        }
+      });     
+      
+      // Password eye 
+      $("#eye").click(function () {
+        if ($("#txtpwd2").prop("type") === "password") {
+          $("#txtpwd2").prop("type", "text");
+          $("#eyep").addClass("fa-eye").removeClass("fa-eye-slash");
+        } else {
+          $("#txtpwd2").prop("type", "password");
+          $("#eyep").addClass("fa-eye-slash").removeClass("fa-eye");
+        }
+      });
+
+
+      $("#txtpwd3").keyup(function () {
+        let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        let pwd = $("#txtpwd3").val();
+        if (regex.test(pwd) == true)
+          $("#valid3").html("Valid password ");
+        else
+          $("#valid3").html("Must have  A-Z , a-z ,0-9 , special chracter ");
+      })
+
+      $("#txtpwd2").keyup(function () {
+        let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        let pwd = $("#txtpwd2").val();
+        if (regex.test(pwd) == true)
+          $("#valid2").html("Valid password ");
+        else
+          $("#valid2").html("Must have  A-Z , a-z ,0-9 , special chracter ");
+      })
         });
     </script>
     
@@ -128,15 +169,35 @@
                             <label for="exampleInputPassword1" class="form-label">Old Password</label>
                             <input type="password" class="form-control" required id="txtpwd1">
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="exampleInputPassword2" class="form-label">New Password</label>
-                            <input type="password" class="form-control" required id="txtpwd2">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword3" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" required id="txtpwd3">
-                        </div>
+                                      <!-- Password + Eye in same row -->
+            <div class="mb-3">
+              <label for="txtpwd" class="form-label">New Password</label>
+
+              <div class="position-relative">
+                <input type="password" class="form-control pe-5" id="txtpwd2">
+
+                <!-- Eye Icon Inside Input -->
+                <i class="fa-regular fa-eye-slash position-absolute" id="eye"
+                  style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></i>
+              </div>
+
+              <div class="alert1" role="alert" id="valid2">*</div>
+            </div>
+          
+            <!-- Password + Eye in same row -->
+            <div class="mb-3">
+              <label for="txtpwd" class="form-label">Confirm New Password</label>
+
+              <div class="position-relative">
+                <input type="password" class="form-control pe-5" id="txtpwd3">
+
+                <!-- Eye Icon Inside Input -->
+                <i class="fa-regular fa-eye-slash position-absolute" id="eyep"
+                  style="top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></i>
+              </div>
+
+              <div class="alert1" role="alert" id="valid3">*</div>
+            </div>
                     </form>
                 </div>
                 <div class="modal-footer">
